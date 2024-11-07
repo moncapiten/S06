@@ -1,14 +1,14 @@
 dataPosition = '../../Data/';
-filename = 'data001';
+filename = [ 'data001' 'data002' ];
 %filename2 = 'dataBode003';
-
+color = [ 'red', '#ffa500'];
 mediaposition = '../../Media/';
 medianame = 'AmplitudeOffsetIn';
 
 flagSave = false;
 
 % data import and creation of variance array
-rawData = readmatrix(strcat(dataPosition, filename, '.txt'));
+rawData = readmatrix(strcat(dataPosition, filename(1:7), '.txt'));
 %rawData2 = readmatrix(strcat(dataPosition, filename2, '.txt'));
 
 vv = rawData(:, 1);
@@ -25,13 +25,23 @@ ch2 = rawData(:, 3);
 
 R = 469.98;
 
-i = ch1/R;
-i = i * 1000;
+i = 1000* ch1/R;
 
-semilogy(ch2, i);
+semilogy(ch2, i, Color= color(1));
 hold on
 grid on
 grid minor
+
+for i = 2:length(filename)
+    swapRawData = readmatrix(strcat(dataPosition, filename((1+7*i):(2*i*7)), '.txt'));
+    swapch1 = swapRawData(:, 2);
+    swapch2 = swapRawData(:, 3);
+    swapi = swapch1/R;
+    semilogy(swapch2, swapi, Color= color(i));
+end
+
+
+
 hold off
 
 title('Iv plot for LEDs');
@@ -39,25 +49,6 @@ legend('Iv - red LED', Location= 'nw');
 ylabel('I [mA]');
 xlabel('V [V]');
 
-
-%{
-
-semilogx(ff, vi, 'o', Color = '#0027BD');
-hold on
-semilogx(ff, oi, 'o', Color = 'blue');
-semilogx(ff, vi2, 'v', Color = 'magenta');
-semilogx(ff, oi2, 'v', Color = 'red');
-
-grid on
-grid minor
-title('Amlitude and Offset of input signal');
-legend('Amplitude in - 4.5k divider', 'Offset in - 4.5k divider', 'Amplitude in - 45k divider', 'Offset in - 45k divider', Location= 'ne')
-ylabel('Vi Amplitude [V]')
-xlabel('frequency [Hz]')
-
-hold off
-
-%}
 
 if flagSave
     fig = gcf;
