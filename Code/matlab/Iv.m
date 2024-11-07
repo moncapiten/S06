@@ -17,6 +17,8 @@ medianame = 'LED';
 
 R = 469.98;
 Ith = 7 * 1e-6;
+I_act = [];
+V_act = [];
 
 flagSave = false;
 
@@ -31,13 +33,25 @@ for i = 1:length(filename)
     swapch1 = swapRawData(:, 2);
     swapch2 = swapRawData(:, 3);
     swapi = swapch1/R;
-    semilogy(swapch2, swapi, Color= color(i));
+    semilogy(swapch2, swapi, '--', Color= color(i));
     if i == 1
         hold on
     end
+    for i = 1:(length(swapi)-1)
+        if ( (swapi(i)) <= Ith) && (swapi(i+1) > Ith)
+            I_act = [I_act, swapi(i)];
+            V_act = [V_act, swapch2(i)];
+        end
+    end
 end
 
-plot(linspace(1, 3, 100), repelem(Ith, 100), '--', Color= 'black');
+plot(linspace(1, 3, 100), repelem(Ith, 100), '-.', Color= 'black');
+
+
+for i = 1:length(I_act)
+    plot(V_act(i), I_act(i), 'x', Color= color(i));
+end
+
 
 
 grid on
@@ -54,7 +68,8 @@ ylim([10^-7 10^-2]);
 
 fontsize(gcf, 14,"points")
 
-
+I_act
+V_act
 
 % media save
 if flagSave
