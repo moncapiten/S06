@@ -1,55 +1,62 @@
+clear all;
+
+%d creating references to data and media files
 dataPosition = '../../Data/';
-filename = [ 'data001' 'data002' ];
-%filename2 = 'dataBode003';
-color = [ 'red', '#ffa500'];
+
+filename = [];
+for i = 1:7
+    if ~(i==6)
+        filename = [filename, strcat("data00", string(i))];
+    end
+end
+
 mediaposition = '../../Media/';
-medianame = 'AmplitudeOffsetIn';
+medianame = 'LED';
+
+% plot and control variables
+
+R = 469.98;
+Ith = 7 * 1e-6;
 
 flagSave = false;
 
-% data import and creation of variance array
-rawData = readmatrix(strcat(dataPosition, filename(1:7), '.txt'));
-%rawData2 = readmatrix(strcat(dataPosition, filename2, '.txt'));
+color = [ "red", "#ffa500", "#ffff00", "green", "#0027bd", "#cc8899", "#a020f0"];
+names = [ "red", "orange", "yellow", "green", "blue", "purple"];
 
-vv = rawData(:, 1);
-ch1 = rawData(:, 2);
-%s_i = repelem(2.1e-3, length(ff));
-%oi = rawData(:, 10);
-ch2 = rawData(:, 3);
-%s_o = repelem(1.5e-2, length(ff));
 
-%ff = rawData(:, 1);
-%vi2 = rawData2(:, 4);
-%oi2 = rawData2(:, 10);
-%vo2 = rawData2(:, 6);
 
-R = 469.98;
-
-i = 1000* ch1/R;
-
-semilogy(ch2, i, Color= color(1));
-hold on
-grid on
-grid minor
-
-for i = 2:length(filename)
-    swapRawData = readmatrix(strcat(dataPosition, filename((1+7*i):(2*i*7)), '.txt'));
+% data import and plot
+for i = 1:length(filename)
+    swapRawData = readmatrix(strcat(dataPosition, filename(i), '.txt'));
     swapch1 = swapRawData(:, 2);
     swapch2 = swapRawData(:, 3);
     swapi = swapch1/R;
     semilogy(swapch2, swapi, Color= color(i));
+    if i == 1
+        hold on
+    end
 end
 
+plot(linspace(1, 3, 100), repelem(Ith, 100), '--', Color= 'black');
 
 
+grid on
+grid minor
 hold off
 
 title('Iv plot for LEDs');
-legend('Iv - red LED', Location= 'nw');
-ylabel('I [mA]');
-xlabel('V [V]');
+legend( [names, strcat("$ I_{th} = ", sprintf('%.2f', Ith * 1e6), " \mathrm{\mu A} $")], Location= 'nw', Interpreter='latex')
+ylabel('I_V [A]');
+xlabel('Voltage [V]');
+
+xlim([1 3.2])
+ylim([10^-7 10^-2]);
+
+fontsize(gcf, 14,"points")
 
 
+
+% media save
 if flagSave
     fig = gcf;
     orient(fig, 'landscape')
