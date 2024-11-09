@@ -12,6 +12,8 @@ gaml = [6.5112    7.8116    6.2143   11.4325    7.5963    5.3239];
 
 Afl = 1.0e+05 * [0.8563    0.2429    0.1484    1.3423    1.0094    1.1120];
 
+%this should be working version over here lads
+
 c = 299792458
 l_ = uf./c
 % lamb[m] = nu[s^-1]*c[m/s]
