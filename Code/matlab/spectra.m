@@ -8,7 +8,7 @@ names = [ "red", "orange", "yellow", "green", "blue", "purple"];
 mediaposition = '../../Media/';
 medianame = 'Spectra';
 
-flagSave = false;
+flagSave = true;
 
 
 ff = [];
@@ -23,15 +23,27 @@ function y = gauss(params, x)
 end
 
 
+function y = lorentz(params, x)
+    denom = (x-params(1)).^2 + params(2)^2;
+    y = params(3) * params(2) ./ ( pi * denom);
+end
+
+
 u0 = [630, 610, 590, 520, 460, 400];
 s0 = [10, 10, 10, 10, 10, 10];
 A0 = [4400, 1000, 800, 3800, 4500, 6500];
-A0 = A0 .* sqrt(2*pi*s0.*s0);
+Ag = A0 .* sqrt(2*pi*s0.*s0);
+% at x = x0 ⇒ A = A0/(gam*pi) ⇒ gam = A0/(A*pi)
+%gam0 = 1./(A0*pi);
+gam0 = repelem(9, length(A0));
 
-uf = [];
-sf = [];
-Af = [];
 
+ufg = [];
+sfg = [];
+Afg = [];
+ufl = [];
+gaml = [];
+Afl = [];
 
 
 for i = 1:length(filename)
@@ -50,13 +62,18 @@ for i = 1:length(filename)
     %}
 
 
-    p0i = [u0(i), s0(i), A0(i)];
+    p0i = [u0(i), s0(i), Ag(i)];
+    p0l = [u0(i), gam0(i), Ag(i)];
 
-    [beta, R, ~, covbeta] = nlinfit(ff, I, @gauss, p0i);
-    uf = [uf, beta(1)];
-    sf = [sf, beta(2)];
-    Af = [Af, beta(3)];
+    [betag, Rg, ~, covbetag] = nlinfit(ff, I, @gauss, p0i);
+    [betal, Rl, ~, covbetal] = nlinfit(ff, I, @lorentz, p0l);
+    ufg = [ufg, betag(1)];
+    sfg = [sfg, betag(2)];
+    Afg = [Afg, betag(3)];
 
+    ufl = [ufl, betal(1)];
+    gaml = [gaml, betal(2)];
+    Afl = [Afl, betal(3)];
 
     plot(ff, I, 'o', Color= color(i));
     if i==1
@@ -64,12 +81,17 @@ for i = 1:length(filename)
     end
 
 %    plot(ff, gauss(p0i, ff), '--', Color= "magenta");
-    plot(ff, gauss(beta,ff), '-', Color= color(length(color)+1-i))
+%    plot(ff, lorentz(p0l, ff), '--', Color= 'cyan');
+    plot(ff, gauss(betag,ff), '-.', Color= color(length(color)+1-i))
+    plot(ff, lorentz(betal, ff), '--', Color= color(length(color)+1-i));
 end
 
-
-legend("red - data", "red - fit", "orange - data", "orange - fit", "yellow - data", "yellow - fit", "green - data", "green - fit", "blue - data", "blue - fit", "purple - data", "purple - fit", location= "ne");
-
+legendlist = [];
+for i = 1:length(names)
+    legendlist = [legendlist,  strcat(names(i), " - data"), strcat(names(i), " - fit Gaussian"), strcat(names(i), " - fit Lorentz") ];
+end
+%legend("red - data", "red - fit", "orange - data", "orange - fit", "yellow - data", "yellow - fit", "green - data", "green - fit", "blue - data", "blue - fit", "purple - data", "purple - fit", location= "ne");
+legend(legendlist, location= "ne");
 
 title("LEDs Spectra");
 xlabel("frequency [Hz]");
@@ -84,9 +106,13 @@ ylim([-10 6700]);
 
 hold off
 
-uf
-sf
+ufg
+sfg
+Afg
 
+ufl
+gaml
+Afl
 
 
 
