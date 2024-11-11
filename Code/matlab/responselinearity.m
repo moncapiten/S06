@@ -16,13 +16,13 @@ ch2 = rawData(:, 3);
 Ri = 469.98;
 Ro = 100.23 * 1e3;
 
-ii = ch1/Ri;
-io = ch2/Ro;
+ii = ch1;
+io = ch2;
 
 
-semilogy(tt, ii, 'o', Color = '#0027BD');
+plot(tt, ii, 'o', Color = '#0027BD');
 hold on
-semilogy(tt, io, 'o', Color = 'red');
+plot(tt, io, 'o', Color = 'red');
 
 grid on
 grid minor
