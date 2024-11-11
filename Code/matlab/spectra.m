@@ -10,7 +10,7 @@ names = [ "red", "orange", "yellow", "green", "blue", "purple"];
 mediaposition = '../../Media/';
 medianame = 'Spectra';
 
-flagSave = true;
+flagSave = false;
 
 
 ff = [];
@@ -86,6 +86,10 @@ for i = 1:length(filename)
 %    plot(ff, lorentz(p0l, ff), '--', Color= 'cyan');
     plot(ff, gauss(betag,ff), '-.', Color= color(length(color)+1-i))
     plot(ff, lorentz(betal, ff), '--', Color= color(length(color)+1-i));
+
+%    swapI = linspace(1, max(I), 20);
+%    swapff = repelem(ufl(i), 20);
+%    plot(swapff, swapI, "--", Color= color(i))
 end
 
 legendlist = [];
@@ -96,7 +100,7 @@ end
 legend(legendlist, location= "ne");
 
 title("LEDs Spectra");
-xlabel("frequency [Hz]");
+xlabel("wavelength [nm]");
 ylabel("Intensity [a.u.]");
 fontsize(14, "points");
 
