@@ -1,5 +1,9 @@
 clear all;
 
+flagSave = true;
+mediaposition = '../../Media/';
+medianame = 'h-calculation';
+
 
 
 % data import from previous codes
@@ -117,3 +121,8 @@ fontsize(14, "points");
 
 
 
+if flagSave
+  fig = gcf;
+  orient(fig, 'landscape')
+  print(fig, strcat(mediaposition, medianame, '.pdf'), '-dpdf')
+end
