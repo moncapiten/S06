@@ -2,7 +2,7 @@ clear all;
 
 flagSave = false;
 mediaposition = '../../Media/';
-medianame = 'h-calculation';
+medianame = 'Planck';
 
 
 
@@ -102,8 +102,8 @@ ylabel(ax1, 'Activation Voltage [V]');
 
 dim = [.65 .37 .3 .3];
 dimk = [.11 .51 .3 .3];
-str1 = strcat('$ h_{mes} \approx $ ', " ", sprintf('%.2e', h_), " $ \pm $ ", sprintf('%.2e', err_h ), " eV");
-str2 = strcat('$ h = $', " ", sprintf('%.2e', h) );
+str1 = strcat('$ h_{mes} \approx $ ', " ", sprintf('%.2e', h_), " $ \pm $ ", sprintf('%.2e', err_h ), " eV s");
+str2 = strcat('$ h = $', " ", sprintf('%.2e', h), " eV s" );
 strk = strcat('$ k^2_{red} = $', " ", sprintf('%.2f', k) );
 annotation('textbox', dim, 'interpreter','latex','String', [str1 str2],'FitBoxToText','on', 'BackgroundColor', 'white');
 annotation('textbox', dimk, 'interpreter','latex','String',strk,'FitBoxToText','on', 'BackgroundColor', 'white');
