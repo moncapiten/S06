@@ -1,6 +1,6 @@
 clear all;
 
-flagSave = false;
+flagSave = true;
 mediaposition = '../../Media/';
 medianame = 'Planck';
 
