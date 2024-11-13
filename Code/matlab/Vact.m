@@ -1,6 +1,6 @@
 clear all;
 
-flagSave = true;
+flagSave = false;
 mediaposition = '../../Media/';
 medianame = 'h-calculation';
 
@@ -107,7 +107,7 @@ annotation('textbox', dim, 'interpreter','latex','String', [str1 str2],'FitBoxTo
 annotation('textbox', dimk, 'interpreter','latex','String',strk,'FitBoxToText','on', 'BackgroundColor', 'white');
 
 
-xlabel(ax2, '${ \lambda^{-1} [1/\mathrm{nm}] }$', 'interpreter', 'latex');
+xlabel(ax2, '${ \lambda^{-1} (wavenumber) [1/\mathrm{nm}] }$', 'interpreter', 'latex');
 %xlabel(ax2, '${\mu}$','interpreter','latex', 'FontWeight','bold')
 ylabel(ax2, 'Activation Voltage - Residuals [V]');
 
