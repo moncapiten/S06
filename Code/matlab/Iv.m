@@ -11,7 +11,7 @@ for i = 1:7
 end
 
 mediaposition = '../../Media/';
-medianame = 'LED';
+medianame = 'LED2';
 
 % plot and control variables
 
@@ -20,7 +20,7 @@ Ith = 7 * 1e-6;
 I_act = [];
 V_act = [];
 
-flagSave = false;
+flagSave = true;
 
 color = [ "red", "#ffa500", "#ffff00", "green", "#0027bd", "#cc8899", "#a020f0"];
 names = [ "red", "orange", "yellow", "green", "blue", "purple"];

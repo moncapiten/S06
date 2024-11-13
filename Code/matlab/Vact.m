@@ -93,13 +93,15 @@ t.TileSpacing = "tight";
 linkaxes([ax1, ax2], 'x');
 
 
+legend(ax1, 'Activation voltage', 'linear model - p0', 'linear model - fit', Location='nw')
+
 
 ylabel(ax1, 'Activation Voltage [V]');
 
 
 
-dim = [.06 .65 .3 .3];
-dimk = [.06 .55 .3 .3];
+dim = [.65 .37 .3 .3];
+dimk = [.11 .51 .3 .3];
 str1 = strcat('$ h_{mes} \approx $ ', " ", sprintf('%.2e', h_), " $ \pm $ ", sprintf('%.2e', err_h ), " eV");
 str2 = strcat('$ h = $', " ", sprintf('%.2e', h) );
 strk = strcat('$ k^2_{red} = $', " ", sprintf('%.2f', k) );
