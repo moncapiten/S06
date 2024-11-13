@@ -100,8 +100,8 @@ ylabel(ax1, 'Activation Voltage [V]');
 
 
 
-dim = [.65 .37 .3 .3];
-dimk = [.11 .51 .3 .3];
+dim = [.63 .37 .3 .3];
+dimk = [.105 .51 .3 .3];
 str1 = strcat('$ h_{mes} \approx $ ', " ", sprintf('%.2e', h_), " $ \pm $ ", sprintf('%.2e', err_h ), " eV s");
 str2 = strcat('$ h = $', " ", sprintf('%.2e', h), " eV s" );
 strk = strcat('$ k^2_{red} = $', " ", sprintf('%.2f', k) );
