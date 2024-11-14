@@ -1,5 +1,5 @@
 dataPosition = '../../Data/';
-filename = 'data008';
+filename = 'data019';
 
 
 % data import and creation of variance array
@@ -17,7 +17,7 @@ plot(tt, vo, 'v', Color = 'magenta');
 grid on
 grid minor
 title('Amlitude and Ottset of input signal');
-legend('Amplitude in - 4.5k divider', 'Ottset in - 4.5k divider', 'Amplitude in - 45k divider', 'Ottset in - 45k divider', Location= 'ne')
+legend('ch1', 'ch2', Location= 'ne')
 ylabel('Vi Amplitude [V]')
 xlabel('frequency [Hz]')
 
