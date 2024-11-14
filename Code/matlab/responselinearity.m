@@ -30,7 +30,7 @@ function y = lin(params, x)
 end
 
 
-for i = 1:length(filenames)
+for i = 1:length(filenames) 
 
     rawData = readmatrix(strcat(dataPosition, filenames(i), '.txt'));
     tt = rawData(:, 1);
