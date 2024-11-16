@@ -9,7 +9,7 @@ end
 color = [ "red", "#ffa500", "#777777", "green", "#0027bd", "#a020f0"];
 
 mediaposition = '../../Media/';
-medianame = 'AmplitudeOffsetIn';
+medianame = 'SpectralResponse';
 
 flagSave = false;
 
@@ -233,8 +233,8 @@ hold off;
 
 title(t, 'Photodiode Spectral Response Curve');
 %legend('Amplitude in - 4.5k divider', 'Offset in - 4.5k divider', 'Amplitude in - 45k divider', 'Offset in - 45k divider', Location= 'ne')
-title(ax1, 'Raw data - linear fit and connecting line');
-title(ax2, 'Data rescaled by LED emission spectrum - linear fit and connecting line');
+title(ax1, ['Raw data', 10, 'linear fit and connecting line']);
+title(ax2, ['Data rescaled by LED emission spectrum', 10, 'linear fit and connecting line']);
 
 ylabel(ax1, 'Photodiode Current [ ${ \mathrm{\mu A} }$ ]', 'interpreter', 'latex');
 xlabel(ax1, 'LED Current [mA]', 'interpreter', 'latex');
