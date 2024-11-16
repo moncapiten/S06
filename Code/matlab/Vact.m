@@ -59,7 +59,7 @@ h_/h;
 
 
 t = tiledlayout(2, 1, "TileSpacing","tight", "Padding","tight");
-    
+
 % plot of the data, prefit and fit
 ax1 = nexttile();
 
